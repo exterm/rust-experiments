@@ -60,7 +60,7 @@ fn main() {
     println!("Display: {}", point);
     println!("Debug: {:?}", point);
 
-    let complex = Complex { real: 3.3, imag: 7.2 };
+    let complex: Complex = Complex { real: 3.3, imag: 7.2 };
 
     println!("Compare complex numbers:");
     println!("Display: {}", complex);
