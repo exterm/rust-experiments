@@ -68,10 +68,23 @@ fn main() {
     println!("pair contains {:?} and {:?}", integer, decimal);
 
     println!("The area of {:?} is {:?}.", rectangle, rect_area(&rectangle));
+
+    let point: Point = Point { x: 0.3, y: 0.4 };
+    let size = 1.0;
+
+    println!("constructing square out of {:?} and {:?}:", point, size);
+    println!("{:?}", square(point, size));
 }
 
 fn rect_area(rect: &Rectangle) -> f32 {
     let height = (rect.p1.y - rect.p2.y).abs();
     let width = (rect.p1.x - rect.p2.x).abs();
     height * width
+}
+
+fn square(point: Point, size: f32) -> Rectangle {
+    Rectangle {
+        p1: Point { x: point.x, y: point.y },
+        p2: Point { x: point.x + size, y: point.y + size }
+    }
 }
