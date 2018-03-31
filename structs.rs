@@ -11,13 +11,14 @@ struct Nil;
 struct Pair(i32, f32);
 
 // A struct with two fields
+#[derive(Debug)]
 struct Point {
     x: f32,
     y: f32,
 }
 
 // Structs can be reused as fields of another struct
-#[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     p1: Point,
     p2: Point,
@@ -26,12 +27,11 @@ struct Rectangle {
 fn main() {
     // Create struct with field init shorthand
     let name = "Peter";
-    let age = 27;
+    let age = 28;
     let peter = Person { name, age };
 
     // Print debug struct
     println!("{:?}", peter);
-
 
     // Instantiate a `Point`
     let point: Point = Point { x: 0.3, y: 0.4 };
@@ -47,7 +47,7 @@ fn main() {
     // Destructure the point using a `let` binding
     let Point { x: my_x, y: my_y } = point;
 
-    let _rectangle = Rectangle {
+    let rectangle = Rectangle {
         // struct instantiation is an expression too
         p1: Point { x: my_y, y: my_x },
         p2: point,
@@ -66,4 +66,12 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
+
+    println!("The area of {:?} is {:?}.", rectangle, rect_area(&rectangle));
+}
+
+fn rect_area(rect: &Rectangle) -> f32 {
+    let height = (rect.p1.y - rect.p2.y).abs();
+    let width = (rect.p1.x - rect.p2.x).abs();
+    height * width
 }
